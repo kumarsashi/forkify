@@ -1,0 +1,25 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "App to search recpies",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kumarsashi/forkify.git"
+  },
+  "author": "Sashi Kumar Ram",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kumarsashi/forkify/issues"
+  },
+  "homepage": "https://github.com/kumarsashi/forkify#readme",
+  "devDependencies": {
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {}
+}
