@@ -1,5 +1,5 @@
 import Search from './models/Search';
-import { elements } from './views/base';
+import { elements, renderLoader, clearLoader } from './views/base';
 import * as searchView from './views/searchView';
 
 /**
@@ -26,13 +26,16 @@ const ControlSearch = async () => {
         //3. Prepare UI for results
         searchView.clearInput();
         searchView.clearResults();
+        renderLoader(elements.result);
 
         //4. Search for recpies
         await state.search.getResults();
-
+         clearLoader();
+        console.log('waiting for await function to finish');
         //5. Render results in UI
        // console.log(state);
         searchView.renderResults(state.search.result);
+        console.log('results rendered');
 
        
     }
