@@ -1,6 +1,7 @@
 import Search from './models/Search';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as searchView from './views/searchView';
+import Recipe from './models/Recipe';
 
 /**
  * - Global state of the app
@@ -30,7 +31,8 @@ const ControlSearch = async () => {
 
         //4. Search for recpies
         await state.search.getResults();
-         clearLoader();
+
+        clearLoader();
         console.log('waiting for await function to finish');
         //5. Render results in UI
        // console.log(state);
@@ -47,3 +49,23 @@ elements.searchForm.addEventListener('submit', e => {
 })
 
 //console.log(res);
+
+elements.searchResPages.addEventListener('click',(e) => {
+    let button = e.target.closest('.btn-inline');
+    if(button) {
+        let goToPage = parseInt(button.dataset.goto, 10);
+        searchView.clearResults();
+        searchView.clearPaginationButtons();
+        searchView.renderResults(state.search.result, goToPage);
+        console.log(goToPage);
+    }
+})
+
+/**
+ * Recipe controller
+ * 
+ */
+
+ const r = new Recipe(47746);
+ r.getRecipe();
+ console.log(r);
