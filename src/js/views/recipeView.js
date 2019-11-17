@@ -1,17 +1,36 @@
 import { elements} from './base';
+import {Fraction } from 'fractional';
 
+export const clearRecipe = () => {
+    elements.recipeDiv.innerHTML = '';
+}
+
+const formatCount = count => {
+    if( count ) {
+        const [int, dec] = count.toString().split('.').map( el => parseInt(el,10));
+
+        if(!dec) return count;
+        if( int === 0 ){
+            const fr = new Fraction(count);
+            return `${fr.numerator}/${fr.denominator}`;
+        } else {
+            const fr = new Fraction(count - int);
+            return `${int} ${fr.numerator}/${fr.denominator}`;
+        }
+    }
+    return '?';     
+}
 const createIngredient = (ingredient) => {
     return `<li class="recipe__item">
     <svg class="recipe__icon">
         <use href="img/icons.svg#icon-check"></use>
     </svg>
-    <div class="recipe__count">${ingredient.count}</div>
+    <div class="recipe__count">${formatCount(ingredient.count)}</div>
     <div class="recipe__ingredient">
         <span class="recipe__unit">${ingredient.unit}</span>
         ${ingredient.ingredient}
     </div>
-</li>
-    `
+        </li>`
 }
 
 export const renderRecipe = (recipe) => {
@@ -19,7 +38,7 @@ export const renderRecipe = (recipe) => {
     <figure class="recipe__fig">
         <img src=${recipe.img} alt="${recipe.title}" class="recipe__img">
         <h1 class="recipe__title">
-            <span>Pasta with tomato cream sauce</span>
+            <span>${recipe.title}</span>
         </h1>
     </figure>
     <div class="recipe__details">
@@ -60,7 +79,7 @@ export const renderRecipe = (recipe) => {
 
     <div class="recipe__ingredients">
     <ul class="recipe__ingredient-list">
-        ${recipe.ingredients.map( el => createIngredient(el))}
+        ${recipe.ingredients.map( el => createIngredient(el)).join('')}
         <li class="recipe__item">
             <svg class="recipe__icon">
                 <use href="img/icons.svg#icon-check"></use>

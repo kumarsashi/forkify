@@ -76,9 +76,11 @@ async function controlRecipe() {
 
     if(id) {
         // Prepare UI for changes
-
+        recipeView.clearRecipe();
+        renderLoader(elements.recipeDiv);
         // Create new recipe object
 
+        
         state.recipe = new Recipe(id);
         console.log('recipe before try:');
         console.log( state.recipe);
@@ -97,7 +99,8 @@ async function controlRecipe() {
         
 
         // Render recipe
-            recipeView.renderRecipe(state.recipe);
+        clearLoader();
+        recipeView.renderRecipe(state.recipe);
         console.log('show ingredients');
         console.log(state.recipe.ingredients);
        // state.recipe.parseIngredients();

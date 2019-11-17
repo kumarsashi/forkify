@@ -15,6 +15,7 @@ export default class Recipe {
                 this.author = response.data.recipe.publisher;
                 this.img = response.data.recipe.image_url;
                 this.ingredients = response.data.recipe.ingredients;
+                console.log(response);
                 
          } catch(err) {
              console.log(err);
@@ -36,16 +37,18 @@ export default class Recipe {
         console.log('inside parse ingredients');
         const unitsLong = ['tablespoons','tablespoon','ounce','ounces','teaspoon','teaspoons','cups','pounds'];
         const unitsShort = ['tbsp','tbsp','oz','oz','tsp','tsp','cup','pound'];
+        const units = [...unitsShort, 'kg','g']
 
         const newIngredients = this.ingredients.map( (el) => {
                 // 1) uniform units
                         let ingredient = el.toLowerCase();
                         unitsLong.forEach((unit, i) => {
-                            ingredient = ingredient.replace(unit, unitsShort[i]);
+                            ingredient = ingredient.replace(unit, units[i]);
                         });                    
 
                 // 2) Remove parentheses
                         ingredient = ingredient.replace(/[()]/g, '');
+                        
                       //  console.log('after parenthesis removal '+ ingredient);
                  
                       // 3) Parse ingredient into count, unit and ingredient

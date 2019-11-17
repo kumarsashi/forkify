@@ -16,6 +16,9 @@ export const clearResults = () => {
    }
 }
 
+export const highlightSelected = id => {
+   document.querySelector(`a[href="${id}]"`).classList.add('.results__link-active');
+}
 export const clearPaginationButtons = () => {
    let parent = elements.searchResPages;
    console.log(parent);
